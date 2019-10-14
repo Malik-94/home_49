@@ -1,0 +1,5 @@
+Task.objects.filter(status__statuses='new', update_at__month ='10')
+Task.objects.filter(project__name='name').values('type__types')
+Project.objects.filter(description='name').values('project__name')
+
+
