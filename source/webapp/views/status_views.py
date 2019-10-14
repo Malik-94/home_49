@@ -1,71 +1,45 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import View, TemplateView
+from django.urls import reverse
+from django.views.generic import CreateView, UpdateView, DeleteView
 from webapp.models import Status
 from webapp.forms import StatusForm
 from django.views.generic import ListView
 
 
-
 class StatusList(ListView):
-    context_object_name = 'statuses'
+    context_object_name = 'status'
     model = Status
     template_name = 'status/status.html'
 
+    def get_success_url(self):
+        return reverse('index')
 
 
-class StatusIndex(TemplateView):
-    template_name = 'status.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['status'] = Status.objects.all()
-        return context
+class StatusCreateView(CreateView):
+    model = Status
+    template_name = 'status/status_create.html'
+    context_object_name = 'status'
+    form_class = StatusForm
+
+    def get_success_url(self):
+        return reverse('status_list')
 
 
+class StatusUpdateView(UpdateView):
+    template_name = 'status/status_update.html'
+    model = Status
+    form_class = StatusForm
+    context_object_name = 'status'
 
-class StatusCreateView(View):
-    def get (self,request, *args, **kwargs):
-        if request.method == 'GET':
-            form = StatusForm()
-            return render(request, 'status/status_create.html', context={'form': form})
-
-    def post (self, request, *args, **kwargs):
-        form = StatusForm(data=request.POST)
-        if form.is_valid():
-            status = Status.objects.create(
-            statuses=form.cleaned_data['status'],
-
-            )
-            return redirect('status_add')
-        else:
-            return render(request, 'status/status_create.html', context={'form': form})
+    def get_success_url(self):
+        return reverse('status_list')
 
 
+class StatusDeleteView(DeleteView):
+    template_name = 'status/status_delete.html'
+    model = Status
+    context_object_name = 'status'
 
-class StatusUpdateView(View):
-    def get (self, request, pk, *args, **kwargs):
-            status = get_object_or_404(Status, pk=pk)
-            if request.method == 'GET':
-                form = StatusForm(data={
-                    'status': status
-                })
-            return render(request, 'status/status_update.html', context={'form': form, 'status': status})
-
-    def post (self, request, pk, *args, **kwargs):
-            form = StatusForm(data=request.POST)
-            status = get_object_or_404(Status, pk=pk)
-            return render(request, 'status/status_update.html', context={'form': form, 'status': status})
-
-
-
-class StatusDeleteView(View):
-    def get (self,request , pk, *args, **kwargs):
-        status = get_object_or_404(Status, pk=pk)
-        if request.method == 'GET':
-            return render(request, 'status/status_delete.html', context={'status': status})
-
-    def post (self,request,  *args, **kwargs):
-        status = get_object_or_404(Status, pk=kwargs.get('pk'))
-        status.delete()
-        return redirect('status_read')
+    def get_success_url(self):
+        return reverse('index')
 
 

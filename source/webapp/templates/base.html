@@ -14,13 +14,12 @@
     <div class="container">
         <ul class="menu">
             <li><a href="{% url 'index' %}">Home</a></li>
-           <li><a href="{% url 'task_add'%}">Create</a></li>
-           <li><a href="{% url 'status_list'%}">All status</a></li>
-            <li><a href="{% url 'status_add'%}">Status Create</a></li>
-             <li><a href="{% url 'type_list'%}">All type</a></li>
-            <li><a href="{% url 'type_add'%}">Type Create</a></li>
-
-
+            <li><a href="{% url 'project_list' %}">Projects</a></li>
+           <li><a href="{% url 'task_add' %}">Create</a></li>
+           <li><a href="{% url 'status_list' %}">All status</a></li>
+            <li><a href="{% url 'status_add' %}">Status Create</a></li>
+             <li><a href="{% url 'type_list' %}">All type</a></li>
+            <li><a href="{% url 'type_add' %}">Type Create</a></li>
              {% block menu %}
             {% endblock %}
 </ul>

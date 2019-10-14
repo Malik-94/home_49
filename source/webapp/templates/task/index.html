@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 {% block menu %}
-
-{#    <li><a href="{% url 'task_add' %}">Add Task</a></li>#}
 {% endblock %}
 {% block content %}
+        {% include 'partial/simple_search.html' %}
     <h1>task:</h1>
-
         {% if is_paginated %}
         {% include 'partial/pagination.html' %}
-       {% endif %}
+{% endif %}
 
     <hr/>
     {% for task in task %}

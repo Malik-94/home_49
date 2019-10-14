@@ -1,14 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse, reverse_lazy
-from django.views.generic import View, TemplateView
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.views.generic import UpdateView, DeleteView
 from django.views.generic import TemplateView
-from webapp.forms import TaskForm
+from webapp.forms import TaskForm, SimpleSearchForm
 from webapp.models import Task
 from django.views.generic import ListView,CreateView
-from webapp.views.base_views import UpdateView
-from webapp.views.base_views import DeleteView
-
-
 
 
 class IndexView(ListView):
@@ -18,6 +15,20 @@ class IndexView(ListView):
     ordering = ['created_at']
     paginate_by = 2
     paginate_orphans = 1
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['form'] = SimpleSearchForm(self.request.GET)
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        form = SimpleSearchForm(self.request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['search']
+            if query:
+                queryset = queryset.filter(Q(description__icontains=query)|Q(summary__icontains=query))
+        return queryset
 
 
 class TaskView(TemplateView):
@@ -30,52 +41,31 @@ class TaskView(TemplateView):
         return context
 
 
-class TaskCreateView(View):
-    def get (self,request, *args, **kwargs):
-        if request.method == 'GET':
-            form = TaskForm()
-            return render(request, 'task/create.html', context={'form': form})
+class TaskCreateView(CreateView):
+    template_name = 'task/create.html'
+    form_class = TaskForm
+    model = Task
+    context_object_name = 'task'
 
-    def post (self, request, *args, **kwargs):
-        form = TaskForm(data=request.POST)
-        if form.is_valid():
-            task = Task.objects.create(
-            summary=form.cleaned_data['summary'],
-            description=form.cleaned_data['description'],
-            status=form.cleaned_data['status'],
-            type=form.cleaned_data['type'],
-            )
-            return redirect('task_view', pk=task.pk)
-        else:
-            return render(request, 'task/create.html', context={'form': form})
+    def get_success_url(self):
+        return reverse('index')
 
 
 class TaskUpdateView(UpdateView):
     model = Task
     template_name = 'task/update.html'
-    context_key = 'task'
+    context_object_name = 'task'
     form_class = TaskForm
 
-    def get_redirect_url(self):
+    def get_success_url(self):
         return reverse ('task_view', kwargs={'pk': self.object.pk})
-
 
 
 class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'task/delete.html'
     context_key = 'task'
-    redirect_url = reverse_lazy('index')
 
-#
-# class TaskDeleteView(View):
-#     def get (self,request , pk, *args, **kwargs):
-#         task = get_object_or_404(Task, pk=pk)
-#         if request.method == 'GET':
-#             return render(request, 'task/delete.html', context={'task': task})
-#
-#     def post (self,request, *args, **kwargs):
-#         task = get_object_or_404(Task, pk=kwargs.get('pk'))
-#         task.delete()
-#         return redirect('index')
-#
+    def get_success_url(self):
+        return reverse('index')
+
