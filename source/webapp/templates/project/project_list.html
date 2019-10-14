@@ -2,11 +2,10 @@
 {% block menu %}
 {% endblock %}
 {% block content %}
-{#        {% include 'partial/simple_search.html' %}#}
-{#    <h1>task:</h1>#}
-{#        {% if is_paginated %}#}
-{#        {% include 'partial/pagination.html' %}#}
-{#{% endif %}#}
+    <h1>Task:</h1>
+        {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+{% endif %}
 
     <hr/>
     {% for project in projects %}
