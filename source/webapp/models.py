@@ -8,7 +8,7 @@ class Task(models.Model):
     type = models.ForeignKey('webapp.Type' , related_name='task_type', on_delete=models.PROTECT , verbose_name='Тип')
     project = models.ForeignKey('webapp.Project', null=True, related_name='tasks', on_delete=models.PROTECT , verbose_name='Проект')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    update_at = models.DateTimeField(auto_now_add=True, verbose_name='Время обновления')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления')
 
 
     def __str__(self):
@@ -31,4 +31,4 @@ class Project (models.Model):
     summary = models.CharField(max_length=200, null=False, blank=False, verbose_name='Заголовок')
     description = models.TextField(max_length=400, null=True, blank=True, verbose_name='Описание')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    update_at = models.DateTimeField(auto_now_add=True, verbose_name='Время обновления')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления')

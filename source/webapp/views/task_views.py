@@ -21,6 +21,7 @@ class IndexView(ListView):
         context['form'] = SimpleSearchForm(self.request.GET)
         return context
 
+
     def get_queryset(self):
         queryset = super().get_queryset()
         form = SimpleSearchForm(self.request.GET)
