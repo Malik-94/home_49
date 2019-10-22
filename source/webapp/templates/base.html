@@ -20,8 +20,12 @@
             <li><a href="{% url 'status_add' %}">Status Create</a></li>
              <li><a href="{% url 'type_list' %}">All type</a></li>
             <li><a href="{% url 'type_add' %}">Type Create</a></li>
-             {% block menu %}
-            {% endblock %}
+            {% block menu %}{% endblock %}
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}"> Log Out</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}"> Log in</a></li>
+            {% endif %}
 </ul>
     </div>
 </nav>

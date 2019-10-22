@@ -19,6 +19,8 @@ from webapp.views import IndexView, TaskCreateView, TaskUpdateView, TaskDeleteVi
     StatusUpdateView, StatusList, StatusDeleteView, TypeCreateView, TypeList, TypeUpdateView, TypeDeleteView, \
     ProjectListView
 
+from accounts.views import login_view, logout_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
@@ -35,5 +37,11 @@ urlpatterns = [
     path('type/<int:pk>/edit/', TypeUpdateView.as_view(), name='type_update'),
     path('type/<int:pk>/delete/', TypeDeleteView.as_view(), name='type_delete'),
     path('projects/', ProjectListView.as_view(), name='project_list'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
 
 ]
+
+
+
+
