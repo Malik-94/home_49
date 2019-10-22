@@ -1,11 +1,12 @@
 from django.db.models import Q
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import UpdateView, DeleteView
 from django.views.generic import TemplateView
 from webapp.forms import TaskForm, SimpleSearchForm
 from webapp.models import Task
 from django.views.generic import ListView,CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class IndexView(ListView):
@@ -42,17 +43,22 @@ class TaskView(TemplateView):
         return context
 
 
-class TaskCreateView(CreateView):
+class TaskCreateView(LoginRequiredMixin, CreateView):
     template_name = 'task/create.html'
     form_class = TaskForm
     model = Task
     context_object_name = 'task'
 
+    # def dispatch(self, request, *args, **kwargs):
+    #     if request.user.is_authenticated:
+    #         return super().dispatch(request, *args, **kwargs)
+    #     return redirect('accounts:login')
+
     def get_success_url(self):
         return reverse('index')
 
 
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     template_name = 'task/update.html'
     context_object_name = 'task'
@@ -62,7 +68,7 @@ class TaskUpdateView(UpdateView):
         return reverse ('task_view', kwargs={'pk': self.object.pk})
 
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'task/delete.html'
     context_key = 'task'
