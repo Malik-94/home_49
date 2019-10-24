@@ -1,9 +1,11 @@
 from django.views.generic import ListView
 from webapp.forms import SimpleSearchForm
 from webapp.models import Project
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ProjectListView(ListView):
+
+class ProjectListView(LoginRequiredMixin, ListView):
     context_object_name = 'projects'
     model = Project
     template_name = 'project/project_list.html'
