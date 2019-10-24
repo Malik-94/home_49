@@ -33,7 +33,7 @@ class IndexView(ListView):
         return queryset
 
 
-class TaskView(TemplateView):
+class TaskView(LoginRequiredMixin, TemplateView):
     template_name = 'task/task.html'
 
     def get_context_data(self, **kwargs):
