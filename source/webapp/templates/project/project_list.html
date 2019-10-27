@@ -10,9 +10,6 @@
     <hr/>
     {% for project in projects %}
         <h2>{{ project.summary }}</h2>
-{#        <p><a href="{% url 'task_view' task.pk %}">More...</a></p>#}
-{#        <p><a href="% url 'task_update' task.pk %}">Edit</a></p>#}
-{#        <p><a href="{% url 'task_delete' task.pk %}">Delete</a></p>#}
         <hr/>
     {% endfor %}
 {% endblock %}
