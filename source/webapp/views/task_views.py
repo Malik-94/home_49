@@ -55,7 +55,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     #     return redirect('accounts:login')
 
     def get_success_url(self):
-        return reverse('index')
+        return reverse('webapp:index')
 
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
@@ -74,5 +74,5 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     context_key = 'task'
 
     def get_success_url(self):
-        return reverse('index')
+        return reverse('webapp:index')
 

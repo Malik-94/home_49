@@ -10,8 +10,8 @@
         <p>Created by {{ stat.status }} at {{ status.created_at|date:'Y-m-d H:i:s' }}</p>
         <div class="pre">{{ status.type }}</div>
             <div>{{ stat.statuses }}</div>
-        <li><a href="{% url 'status_update' stat.pk %}">Edit</a></li>
-        <li><a href="{% url 'status_delete' stat.pk %}">Delete</a></li>
+        <li><a href="{% url 'webapp:status_update' stat.pk %}">Edit</a></li>
+        <li><a href="{% url 'webapp:status_delete' stat.pk %}">Delete</a></li>
          {% endfor %}
     </div>
 {% endblock %}

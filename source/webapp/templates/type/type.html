@@ -9,8 +9,8 @@
         <p>Category: {{ type.description }}</p>
         <p>Created by {{ type.type }} at {{ type.created_at|date:'Y-m-d H:i:s' }}</p>
         <div class="pre">{{ type.type }}</div>
-         <li><a href="{% url 'type_update' type.pk %}">Edit</a></li>
-        <li><a href="{% url 'type_delete' type.pk %}">Delete</a></li>
+         <li><a href="{% url 'webapp:type_update' type.pk %}">Edit</a></li>
+        <li><a href="{% url 'webapp:type_delete' type.pk %}">Delete</a></li>
        {% endfor %}
 
     </div>

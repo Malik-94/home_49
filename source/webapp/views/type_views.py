@@ -12,12 +12,11 @@ class TypeList( LoginRequiredMixin,ListView):
     template_name = 'type/type.html'
 
     def get_success_url(self):
-        return reverse('index')
+        return reverse('webapp:index')
 
 
 
 class TypeCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'type.html'
     template_name = 'type/type_create.html'
     context_object_name = 'type'
     form_class = TypeForm
@@ -45,7 +44,7 @@ class TypeDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = 'type'
 
     def get_success_url(self):
-        return reverse('index')
+        return reverse('webapp:index')
 
 
 

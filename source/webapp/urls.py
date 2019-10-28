@@ -3,6 +3,8 @@ from webapp.views import IndexView, TaskCreateView, TaskUpdateView, TaskDeleteVi
     StatusUpdateView, StatusList, StatusDeleteView, TypeCreateView, TypeList, TypeUpdateView, TypeDeleteView, \
     ProjectListView
 
+app_name = 'webapp'
+
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('article/<int:pk>/', TaskView.as_view(), name='task_view'),

@@ -6,8 +6,8 @@
     <hr/>
     {% for type in types %}
         <h2>{{ type.types }}</h2>
-        <p><a href="{% url 'type_update' type.pk %}">Edit</a></p>
-        <p><a href="{% url 'type_delete' type.pk %}">Delete</a></p>
+        <p><a href="{% url 'webapp:type_update' type.pk %}">Edit</a></p>
+        <p><a href="{% url 'webapp:type_delete' type.pk %}">Delete</a></p>
 
         <hr/>
     {% endfor %}

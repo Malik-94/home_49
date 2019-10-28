@@ -13,7 +13,7 @@ class StatusList( LoginRequiredMixin, ListView):
     template_name = 'status/status.html'
 
     def get_success_url(self):
-        return reverse('index')
+        return reverse('webapp:index')
 
 
 class StatusCreateView(LoginRequiredMixin, CreateView):
@@ -42,6 +42,6 @@ class StatusDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = 'status'
 
     def get_success_url(self):
-        return reverse('index')
+        return reverse('webapp:index')
 
 
