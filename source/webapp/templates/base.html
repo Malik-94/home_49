@@ -15,14 +15,14 @@
         <ul class="menu">
             <li><a href="{% url 'webapp:index' %}">Home</a></li>
             <li><a href="{% url 'webapp:project_list' %}">Projects</a></li>
-           <li><a href="{% url 'webapp:task_add' %}">Create</a></li>
-           <li><a href="{% url 'webapp:status_list' %}">All status</a></li>
+            <li><a href="{% url 'webapp:task_add' %}">Create</a></li>
+            <li><a href="{% url 'webapp:status_list' %}">All status</a></li>
             <li><a href="{% url 'webapp:status_add' %}">Status Create</a></li>
-             <li><a href="{% url 'webapp:type_list' %}">All type</a></li>
+            <li><a href="{% url 'webapp:type_list' %}">All type</a></li>
             <li><a href="{% url 'webapp:type_add' %}">Type Create</a></li>
             {% block menu %}{% endblock %}
             {% if request.user.is_authenticated %}
-                <li> Привет {{ request.user }}</li>
+                <li> <span class="menu-text"> Привет </span><a href="{% url 'accounts:user_detail' request.user.pk  %}">{{ request.user }}</a></li>
                 <li><a href="{% url 'accounts:logout' %}"> Log Out</a></li>
             {% else %}
                 <li><a href="{% url 'accounts:login' %}"> Log in</a></li>

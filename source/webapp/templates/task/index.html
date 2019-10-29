@@ -7,7 +7,6 @@
         {% if is_paginated %}
         {% include 'partial/pagination.html' %}
 {% endif %}
-
     <hr/>
     {% for task in task %}
         <h2>{{ task.summary }}</h2>
