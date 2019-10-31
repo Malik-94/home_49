@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
-class StatusList( LoginRequiredMixin, ListView):
+class StatusList( ListView):
     context_object_name = 'status'
     model = Status
     template_name = 'status/status.html'

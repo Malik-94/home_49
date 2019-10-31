@@ -27,7 +27,11 @@
             {% else %}
                 <li><a href="{% url 'accounts:login' %}"> Log in</a></li>
                 <li><a href="{% url 'accounts:register' %}">Sing up</a></li>
+                <li><a href="{% url 'accounts:user_list' %}">List</a></li>
+
+
             {% endif %}
+
 </ul>
     </div>
 </nav>

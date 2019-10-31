@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView, View
 # from webapp.models import Task, Type, Status
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class ListView(TemplateView):
@@ -16,7 +17,7 @@ class ListView(TemplateView):
         return self.model.objects.all()
 
 
-class UpdateView(View):
+class UpdateView(LoginRequiredMixin,View):
     form_class = None
     template_name = None
     redirect_url = ''
@@ -70,7 +71,7 @@ class UpdateView(View):
         return self.redirect_url
 
 
-class DeleteView(View):
+class DeleteView(LoginRequiredMixin,View):
     template_name = None
     confirm_deletion = True
     model = None

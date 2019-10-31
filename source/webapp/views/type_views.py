@@ -6,7 +6,7 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class TypeList( LoginRequiredMixin,ListView):
+class TypeList(ListView):
     context_object_name = 'types'
     model = Type
     template_name = 'type/type.html'
