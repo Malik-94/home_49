@@ -2,9 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from accounts.forms import UserCreationForm
-from django.views.generic import UpdateView, DetailView
+from django.views.generic import UpdateView, DetailView, ListView
 
-from webapp.views.base_views import ListView
 
 
 def login_view(request):
@@ -56,5 +55,6 @@ class UserDetailView(DetailView):
 class UserListView(ListView):
     model = User
     template_name = 'user_list.html'
-    context_object_name = 'users'
+    context_object_name = 'user_object'
+
 
