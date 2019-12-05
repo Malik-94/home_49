@@ -5,7 +5,7 @@
     <hr/>
     {% for user_obj in user_object %}
         <p>{{ user_obj }}</p>
-        <a href="{% url 'accounts:user_list'  %}"><h2 class="card-text ">{{ user_obj.username }}</h2></a>
+        <a href="{% url 'accounts:user_detail' user_obj.pk %}"><h2 class="card-text ">{{ user_obj.username }}</h2></a>
         <hr/>
     {% endfor %}
 {% endblock %}

@@ -20,16 +20,14 @@
             <li><a href="{% url 'webapp:status_add' %}">Status Create</a></li>
             <li><a href="{% url 'webapp:type_list' %}">All type</a></li>
             <li><a href="{% url 'webapp:type_add' %}">Type Create</a></li>
+            <li><a href="{% url 'accounts:user_list' %}">List</a></li>
             {% block menu %}{% endblock %}
             {% if request.user.is_authenticated %}
-                <li> <span class="menu-text"> Привет </span><a href="{% url 'accounts:user_detail' request.user.pk  %}">{{ request.user }}</a></li>
+                <li> <span class="menu-text"> Привет </span><a href="{% url 'accounts:user_detail' request.user.pk  %}">{{ request.user.pk }}</a></li>
                 <li><a href="{% url 'accounts:logout' %}"> Log Out</a></li>
             {% else %}
                 <li><a href="{% url 'accounts:login' %}"> Log in</a></li>
                 <li><a href="{% url 'accounts:register' %}">Sing up</a></li>
-                <li><a href="{% url 'accounts:user_list' %}">List</a></li>
-
-
             {% endif %}
 
 </ul>
