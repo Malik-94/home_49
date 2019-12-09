@@ -129,3 +129,20 @@ STATIC_URL = '/static/'
 LOGIN_URL = reverse_lazy('accounts:login')
 LOGIN_REDIRECT_URL = "webapp:index"
 LOGOUT_REDIRECT_URL = "webapp:index"
+
+
+REST_FRAMEWORK = {
+    # Если это включить, то DRF будет сразу выводить JSON,
+    # без графического интерфейса.
+
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #     'rest_framework.renderers.JSONRenderer',
+    # )
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
